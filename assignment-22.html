@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 22 - Validation Utilities</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2457a7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #output {
+            margin-top: 15px;
+            padding: 15px;
+            background: #eaf2ff;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Validation Utility Library</h1>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <input type="email" id="email" placeholder="Enter your email">
+    <input type="number" id="age" placeholder="Enter your age">
+    <input type="number" id="price" placeholder="Enter product price">
+
+    <button onclick="validateForm()">Validate Details</button>
+
+    <div id="output">Validation results will appear here.</div>
+</div>
+
+<script>
+// Utility 1: Check whether a value is empty
+function isRequired(value) {
+    if (value === null || value === undefined) {
+        return false;
+    }
+
+    return String(value).trim() !== "";
+}
+
+// Utility 2: Validate email format
+function isValidEmail(email) {
+    if (!isRequired(email)) return false;
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Utility 3: Validate age
+function isValidAge(age) {
+    if (!isRequired(age)) return false;
+
+    let number = Number(age);
+
+    if (!Number.isInteger(number)) return false;
+    if (number < 1 || number > 120) return false;
+
+    return true;
+}
+
+// Utility 4: Validate positive price
+function isPositiveNumber(value) {
+    if (!isRequired(value)) return false;
+
+    let number = Number(value);
+
+    if (!Number.isFinite(number)) return false;
+    if (number <= 0) return false;
+
+    return true;
+}
+
+function validateForm() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let age = document.getElementById("age").value;
+    let price = document.getElementById("price").value;
+
+    let messages = [];
+
+    // Guard clauses stop invalid values early
+    if (!isRequired(name)) {
+        messages.push("Name is required.");
+    }
+
+    if (!isValidEmail(email)) {
+        messages.push("Please enter a valid email.");
+    }
+
+    if (!isValidAge(age)) {
+        messages.push("Age must be a whole number from 1 to 120.");
+    }
+
+    if (!isPositiveNumber(price)) {
+        messages.push("Price must be greater than zero.");
+    }
+
+    if (messages.length === 0) {
+        messages.push("All details are valid!");
+    }
+
+    document.getElementById("output").textContent =
+        messages.join("\n");
+}
+</script>
+
+</body>
+</html>
