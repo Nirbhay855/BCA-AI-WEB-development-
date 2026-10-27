@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript String Operations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .result p {
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        #error {
+            color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>String Operations</h1>
+
+        <label for="userText">Enter a word or sentence:</label>
+
+        <input
+            type="text"
+            id="userText"
+            placeholder="Enter your text here"
+            value="Hello JavaScript"
+        >
+
+        <button onclick="processString()">Analyze String</button>
+
+        <p id="error"></p>
+
+        <div class="result" id="result">
+            <p>Your results will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function processString() {
+            const text = document.getElementById("userText").value;
+            const error = document.getElementById("error");
+            const result = document.getElementById("result");
+
+            error.textContent = "";
+
+            if (text.trim() === "") {
+                error.textContent = "Please enter some text.";
+                result.innerHTML = "";
+                return;
+            }
+
+            const reversed = Array.from(text).reverse().join("");
+
+            const vowels = text.match(/[aeiou]/gi);
+            const vowelCount = vowels ? vowels.length : 0;
+
+            result.innerHTML = `
+                <p><strong>Original text:</strong> ${escapeHTML(text)}</p>
+                <p><strong>String length:</strong> ${text.length}</p>
+                <p><strong>Uppercase:</strong> ${escapeHTML(text.toUpperCase())}</p>
+                <p><strong>Lowercase:</strong> ${escapeHTML(text.toLowerCase())}</p>
+                <p><strong>Reversed text:</strong> ${escapeHTML(reversed)}</p>
+                <p><strong>Vowel count:</strong> ${vowelCount}</p>
+            `;
+        }
+
+        function escapeHTML(value) {
+            return value.replace(/[&<>"']/g, function (character) {
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[character];
+            });
+        }
+
+        processString();
+    </script>
+
+</body>
+</html>
