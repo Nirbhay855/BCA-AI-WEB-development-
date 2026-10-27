@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Interactive Profile</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        .profile {
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 2px solid #64748b;
+        }
+
+        .profile.active {
+            background: #dcfce7;
+            border-color: #16a34a;
+        }
+
+        .profile.inactive {
+            background: #fee2e2;
+            border-color: #dc2626;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px;
+            margin-top: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #f59e0b;
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <h1>Interactive Profile</h1>
+
+        <section id="profile" class="profile active"
+                 aria-labelledby="profileName">
+            <h2 id="profileName">Rahul Sharma</h2>
+            <p>Course: BCA</p>
+
+            <p>
+                Status:
+                <span id="status" class="status" aria-live="polite">
+                    Active
+                </span>
+            </p>
+        </section>
+
+        <button id="toggleButton"
+                type="button"
+                aria-pressed="true"
+                onclick="toggleProfile()">
+            Deactivate Profile
+        </button>
+    </main>
+
+    <script>
+        let isActive = true;
+
+        function toggleProfile() {
+            const profile = document.getElementById("profile");
+            const status = document.getElementById("status");
+            const button = document.getElementById("toggleButton");
+
+            isActive = !isActive;
+
+            profile.classList.toggle("active", isActive);
+            profile.classList.toggle("inactive", !isActive);
+
+            status.textContent = isActive ? "Active" : "Inactive";
+            button.textContent = isActive
+                ? "Deactivate Profile"
+                : "Activate Profile";
+
+            button.setAttribute("aria-pressed", String(isActive));
+        }
+    </script>
+
+</body>
+</html>
