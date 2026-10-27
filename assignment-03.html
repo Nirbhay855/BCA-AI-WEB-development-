@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #edf2f7;
+            padding: 20px;
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 340px;
+            background: white;
+            padding: 30px;
+            border: 2px solid #d5e1f0;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 20px #00000015;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #2457a7;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 25px;
+            margin: 10px 0;
+            color: #23395d;
+        }
+
+        .role {
+            color: #2457a7;
+            font-weight: bold;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 12px 22px;
+            margin-top: 10px;
+            border-radius: 7px;
+            background: #2457a7;
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-button:hover {
+            background: #163c78;
+        }
+
+        .skills {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #d5e1f0;
+            border-radius: 8px;
+            background: #f7faff;
+        }
+
+        .skills h2 {
+            font-size: 17px;
+            color: #23395d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-card">
+        <div class="avatar">B</div>
+
+        <h1>BCA AI Student</h1>
+        <p class="role">Aspiring Web Developer</p>
+
+        <p>
+            I am learning HTML, CSS and Java.
+            I enjoy building simple websites
+            and improving my technical skills.
+        </p>
+
+        <div class="skills">
+            <h2>My Skills</h2>
+            <p>HTML | CSS | Java Basics</p>
+        </div>
+
+        <a class="contact-button"
+           href="https://github.com/">View GitHub</a>
+    </div>
+</body>
+</html>
