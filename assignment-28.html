@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 28 - Arrays and Strings</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+            text-align: center;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            background: #eaf2ff;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Arrays and Strings Problems</h1>
+
+    <p>This program solves six beginner coding problems.</p>
+
+    <ol>
+        <li>Find the sum of array elements.</li>
+        <li>Find the largest number in an array.</li>
+        <li>Reverse an array.</li>
+        <li>Count vowels in a string.</li>
+        <li>Reverse a string.</li>
+        <li>Check whether a string is a palindrome.</li>
+    </ol>
+
+    <button onclick="solveProblems()">Run All Problems</button>
+
+    <div id="output">Click the button to see the solutions.</div>
+</div>
+
+<script>
+function solveProblems() {
+    let result = "";
+
+    // Problem 1: Sum of array elements
+    let numbers = [10, 20, 30, 40, 50];
+
+    let sum = numbers.reduce(function(total, number) {
+        return total + number;
+    }, 0);
+
+    result += "1. Array: " + numbers.join(", ");
+    result += "\nSum: " + sum + "\n\n";
+
+    // Problem 2: Largest number
+    let largest = Math.max(...numbers);
+
+    result += "2. Largest number: " + largest + "\n\n";
+
+    // Problem 3: Reverse an array
+    let reversedArray = [...numbers].reverse();
+
+    result += "3. Reversed array: ";
+    result += reversedArray.join(", ") + "\n\n";
+
+    // Problem 4: Count vowels
+    let text = "Hello JavaScript";
+    let vowelCount = (text.match(/[aeiou]/gi) || []).length;
+
+    result += "4. Text: " + text;
+    result += "\nNumber of vowels: " + vowelCount + "\n\n";
+
+    // Problem 5: Reverse a string
+    let originalString = "JavaScript";
+
+    let reversedString = originalString
+        .split("")
+        .reverse()
+        .join("");
+
+    result += "5. Original string: " + originalString;
+    result += "\nReversed string: " + reversedString + "\n\n";
+
+    // Problem 6: Check palindrome
+    let word = "madam";
+
+    let reversedWord = word
+        .split("")
+        .reverse()
+        .join("");
+
+    let isPalindrome = word === reversedWord;
+
+    result += "6. Word: " + word;
+    result += "\nIs palindrome? " + (isPalindrome ? "Yes" : "No");
+
+    document.getElementById("output").textContent = result;
+
+    console.log(result);
+}
+</script>
+
+</body>
+</html>
