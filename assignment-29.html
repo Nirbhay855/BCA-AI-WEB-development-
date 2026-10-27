@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 29 - Testing Report</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #2457a7;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #eaf2ff;
+        }
+
+        #output {
+            background: #eaf2ff;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Arrays and Strings Testing Report</h1>
+
+    <h2>Source Code Tester</h2>
+
+    <label for="numbers">Enter numbers separated by commas:</label>
+    <input type="text" id="numbers" value="10,20,30,40,50">
+
+    <label for="word">Enter a word:</label>
+    <input type="text" id="word" value="madam">
+
+    <button onclick="runTests()">Run Tests</button>
+
+    <div id="output">Test results will appear here.</div>
+
+    <h2>Sample Test Cases</h2>
+
+    <table>
+        <tr>
+            <th>Test</th>
+            <th>Input</th>
+            <th>Expected Output</th>
+        </tr>
+        <tr>
+            <td>1. Array sum</td>
+            <td>10,20,30</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>2. Largest number</td>
+            <td>10,20,30</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>3. Reverse array</td>
+            <td>1,2,3</td>
+            <td>3,2,1</td>
+        </tr>
+        <tr>
+            <td>4. Count vowels</td>
+            <td>hello</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>5. Reverse string</td>
+            <td>java</td>
+            <td>avaj</td>
+        </tr>
+        <tr>
+            <td>6. Palindrome</td>
+            <td>madam</td>
+            <td>Yes</td>
+        </tr>
+    </table>
+
+    <h2>Conclusion</h2>
+    <p>
+        The test cases help verify that the array and string
+        programs produce the expected results. Different inputs
+        should be tested to identify errors.
+    </p>
+</div>
+
+<script>
+function runTests() {
+    let numbersText = document.getElementById("numbers").value.trim();
+    let word = document.getElementById("word").value.trim();
+
+    if (numbersText === "" || word === "") {
+        document.getElementById("output").textContent =
+            "Please enter numbers and a word.";
+        return;
+    }
+
+    let parts = numbersText.split(",").map(value => value.trim());
+
+    if (parts.some(value => value === "" || !Number.isFinite(Number(value)))) {
+        document.getElementById("output").textContent =
+            "Invalid input. Enter numbers separated by commas.";
+        return;
+    }
+
+    let numbers = parts.map(Number);
+    let sum = numbers.reduce((total, number) => total + number, 0);
+    let largest = Math.max(...numbers);
+    let reversed = [...numbers].reverse();
+
+    let vowelCount = (word.match(/[aeiou]/gi) || []).length;
+    let reversedWord = word.split("").reverse().join("");
+    let palindrome = word.toLowerCase() === reversedWord.toLowerCase();
+
+    let tests = [
+        ["Array sum", sum, sum === numbers.reduce((a, b) => a + b, 0)],
+        ["Largest number", largest, largest === Math.max(...numbers)],
+        ["Reverse array", reversed.join(", "), reversed[0] === numbers[numbers.length - 1]],
+        ["Vowel count", vowelCount, vowelCount >= 0],
+        ["Reverse string", reversedWord, reversedWord === word.split("").reverse().join("")],
+        ["Palindrome check", palindrome ? "Yes" : "No", palindrome === (word.toLowerCase() === reversedWord.toLowerCase())]
+    ];
+
+    let result = "Test Results:\n\n";
+
+    tests.forEach(function(test) {
+        result += test[0] + ": " + test[1] +
+            " | " + (test[2] ? "PASS" : "FAIL") + "\n";
+    });
+
+    document.getElementById("output").textContent = result;
+}
+</script>
+
+</body>
+</html>
