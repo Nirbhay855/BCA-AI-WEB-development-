@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Array Operations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 25px 15px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+        }
+
+        p {
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            background: #eff6ff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .result h3 {
+            color: #1d4ed8;
+        }
+
+        #error {
+            color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>JavaScript Array Operations</h1>
+
+        <p>Enter numbers separated by commas.</p>
+
+        <input
+            type="text"
+            id="numbers"
+            value="10, 20, 30, 40, 50"
+            placeholder="Example: 10, 20, 30"
+        >
+
+        <button onclick="calculateArray()">Calculate Results</button>
+
+        <p id="error"></p>
+
+        <div class="result" id="result">
+            <h3>Results will appear here</h3>
+        </div>
+    </div>
+
+    <script>
+        function calculateArray() {
+            const input = document.getElementById("numbers").value.trim();
+            const error = document.getElementById("error");
+            const result = document.getElementById("result");
+
+            error.textContent = "";
+
+            if (input === "") {
+                error.textContent = "Please enter some numbers.";
+                return;
+            }
+
+            const parts = input.split(",").map(item => item.trim());
+
+            if (parts.some(item => item === "" || !Number.isFinite(Number(item)))) {
+                error.textContent = "Please enter valid numbers separated by commas.";
+                return;
+            }
+
+            const numbers = parts.map(Number);
+
+            if (!numbers.every(Number.isFinite)) {
+                error.textContent = "Please enter valid numbers.";
+                return;
+            }
+
+            const sum = numbers.reduce((total, num) => total + num, 0);
+            const average = sum / numbers.length;
+            const maximum = Math.max(...numbers);
+            const minimum = Math.min(...numbers);
+
+            result.innerHTML = `
+                <h3>Array: ${numbers.join(", ")}</h3>
+                <p><strong>Total elements:</strong> ${numbers.length}</p>
+                <p><strong>Sum:</strong> ${sum}</p>
+                <p><strong>Average:</strong> ${average}</p>
+                <p><strong>Maximum number:</strong> ${maximum}</p>
+                <p><strong>Minimum number:</strong> ${minimum}</p>
+            `;
+        }
+
+        calculateArray();
+    </script>
+
+</body>
+</html>
