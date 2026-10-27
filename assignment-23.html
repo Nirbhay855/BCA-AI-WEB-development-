@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 23 - Settings and Totals</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #2457a7;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .output {
+            background: #eaf2ff;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Settings and Total Calculator</h1>
+
+    <h2>1. Merge Settings</h2>
+    <p>Change the website name and font size.</p>
+
+    <input type="text" id="siteName"
+           placeholder="Enter website name">
+
+    <input type="number" id="fontSize"
+           placeholder="Enter font size">
+
+    <button onclick="mergeSettings()">Merge Settings</button>
+
+    <div class="output" id="settingsOutput">
+        Merged settings will appear here.
+    </div>
+
+    <h2>2. Calculate Shopping Total</h2>
+
+    <input type="number" id="price1"
+           placeholder="Price of item 1">
+
+    <input type="number" id="price2"
+           placeholder="Price of item 2">
+
+    <input type="number" id="price3"
+           placeholder="Price of item 3">
+
+    <button onclick="calculateTotal()">Calculate Total</button>
+
+    <div class="output" id="totalOutput">
+        Total will appear here.
+    </div>
+</div>
+
+<script>
+// Default settings
+const defaultSettings = {
+    websiteName: "My Website",
+    fontSize: 16,
+    theme: "light",
+    language: "English"
+};
+
+// Merge user settings with default settings
+function mergeSettings() {
+    let name = document.getElementById("siteName").value.trim();
+    let sizeText = document.getElementById("fontSize").value;
+
+    let userSettings = {};
+
+    if (name !== "") {
+        userSettings.websiteName = name;
+    }
+
+    if (sizeText !== "") {
+        let size = Number(sizeText);
+
+        if (!Number.isInteger(size) || size < 10 || size > 40) {
+            document.getElementById("settingsOutput").textContent =
+                "Font size must be a whole number from 10 to 40.";
+            return;
+        }
+
+        userSettings.fontSize = size;
+    }
+
+    let mergedSettings = {
+        ...defaultSettings,
+        ...userSettings
+    };
+
+    document.getElementById("settingsOutput").textContent =
+        "Merged Settings:\n" +
+        JSON.stringify(mergedSettings, null, 2);
+}
+
+// Calculate total of three prices
+function calculateTotal() {
+    let values = [
+        document.getElementById("price1").value,
+        document.getElementById("price2").value,
+        document.getElementById("price3").value
+    ];
+
+    if (values.some(value => value === "")) {
+        document.getElementById("totalOutput").textContent =
+            "Please enter all three prices.";
+        return;
+    }
+
+    let prices = values.map(Number);
+
+    if (prices.some(price => !Number.isFinite(price) || price < 0)) {
+        document.getElementById("totalOutput").textContent =
+            "Prices must be zero or greater.";
+        return;
+    }
+
+    let total = prices.reduce((sum, price) => sum + price, 0);
+
+    document.getElementById("totalOutput").textContent =
+        "Item 1: ₹" + prices[0].toFixed(2) +
+        "\nItem 2: ₹" + prices[1].toFixed(2) +
+        "\nItem 3: ₹" + prices[2].toFixed(2) +
+        "\nGrand Total: ₹" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
