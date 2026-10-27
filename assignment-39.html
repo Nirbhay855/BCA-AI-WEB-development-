@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Profile Event Map</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .profile {
+            padding: 20px;
+            background: #dbeafe;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 14px;
+            margin: 6px 4px 6px 0;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .active {
+            background: #dcfce7;
+            border: 2px solid #16a34a;
+        }
+
+        .inactive {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #e2e8f0;
+        }
+
+        #message {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+    <h1>Interactive Profile</h1>
+
+    <section id="profile" class="profile active">
+        <h2 id="name">Rahul Sharma</h2>
+        <p>Course: BCA</p>
+        <p>Status: <span id="status" aria-live="polite">Active</span></p>
+    </section>
+
+    <button id="toggleButton" type="button"
+            aria-pressed="true">
+        Toggle Status
+    </button>
+
+    <button id="nameButton" type="button">
+        Change Name
+    </button>
+
+    <p id="message" aria-live="polite">
+        Use the buttons to interact with the profile.
+    </p>
+
+    <h2>Event Map</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Element</th>
+                <th>Event</th>
+                <th>Function / Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Toggle Status</td>
+                <td>click</td>
+                <td>toggleStatus()</td>
+            </tr>
+            <tr>
+                <td>Change Name</td>
+                <td>click</td>
+                <td>changeName()</td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+<script>
+    let isActive = true;
+
+    const profile = document.getElementById("profile");
+    const status = document.getElementById("status");
+    const toggleButton = document.getElementById("toggleButton");
+    const name = document.getElementById("name");
+    const nameButton = document.getElementById("nameButton");
+    const message = document.getElementById("message");
+
+    // Event 1: Toggle profile status.
+    function toggleStatus() {
+        isActive = !isActive;
+
+        profile.classList.toggle("active", isActive);
+        profile.classList.toggle("inactive", !isActive);
+
+        status.textContent = isActive ? "Active" : "Inactive";
+        toggleButton.setAttribute("aria-pressed", String(isActive));
+        message.textContent = "Profile is now " + status.textContent + ".";
+    }
+
+    // Event 2: Change the profile name.
+    function changeName() {
+        name.textContent = name.textContent === "Rahul Sharma"
+            ? "Aman Verma"
+            : "Rahul Sharma";
+
+        message.textContent = "Profile name changed to " + name.textContent + ".";
+    }
+
+    // Event listeners connect buttons to their functions.
+    toggleButton.addEventListener("click", toggleStatus);
+    nameButton.addEventListener("click", changeName);
+</script>
+
+</body>
+</html>
