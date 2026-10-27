@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript JSON Example</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 550px;
+            margin: 35px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: monospace;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        #error {
+            color: #dc2626;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>JSON Data Viewer</h1>
+
+        <p>Edit the JSON data below, then click the button.</p>
+
+        <textarea id="jsonInput">{
+  "name": "Rahul Sharma",
+  "rollNumber": 101,
+  "course": "BCA AI",
+  "marks": 85,
+  "skills": ["HTML", "CSS", "JavaScript"]
+}</textarea>
+
+        <button onclick="displayJSON()">Display JSON Data</button>
+
+        <p id="error"></p>
+
+        <div class="result" id="result">
+            <h3>Student Details</h3>
+            <p>Click the button to display the data.</p>
+        </div>
+    </div>
+
+    <script>
+        function displayJSON() {
+            const input = document.getElementById("jsonInput").value;
+            const error = document.getElementById("error");
+            const result = document.getElementById("result");
+
+            error.textContent = "";
+
+            try {
+                const student = JSON.parse(input);
+
+                if (
+                    student === null ||
+                    Array.isArray(student) ||
+                    typeof student !== "object"
+                ) {
+                    throw new Error("Please enter a JSON object.");
+                }
+
+                const name = String(student.name ?? "Not provided");
+                const roll = String(student.rollNumber ?? "Not provided");
+                const course = String(student.course ?? "Not provided");
+                const marks = String(student.marks ?? "Not provided");
+
+                const skills = Array.isArray(student.skills)
+                    ? student.skills.map(String).join(", ")
+                    : "Not provided";
+
+                result.replaceChildren();
+
+                const heading = document.createElement("h3");
+                heading.textContent = "Student Details";
+                result.appendChild(heading);
+
+                const details = [
+                    ["Name", name],
+                    ["Roll Number", roll],
+                    ["Course", course],
+                    ["Marks", marks],
+                    ["Skills", skills]
+                ];
+
+                details.forEach(function(item) {
+                    const paragraph = document.createElement("p");
+                    const strong = document.createElement("strong");
+
+                    strong.textContent = item[0] + ": ";
+                    paragraph.appendChild(strong);
+                    paragraph.appendChild(document.createTextNode(item[1]));
+
+                    result.appendChild(paragraph);
+                });
+
+                const jsonHeading = document.createElement("h3");
+                jsonHeading.textContent = "Formatted JSON";
+                result.appendChild(jsonHeading);
+
+                const pre = document.createElement("pre");
+                pre.textContent = JSON.stringify(student, null, 2);
+                result.appendChild(pre);
+
+            } catch (exception) {
+                error.textContent = "Invalid JSON. Please check the format.";
+                result.replaceChildren();
+            }
+        }
+
+        displayJSON();
+    </script>
+
+</body>
+</html>
