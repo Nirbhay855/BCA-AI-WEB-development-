@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            background: #eaf2ff;
+            padding: 12px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Shopping Cart</h1>
+
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" value="Notebook">
+
+        <label for="price">Price per Item (₹):</label>
+        <input type="number" id="price" value="50">
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" value="2">
+
+        <button onclick="calculateTotal()">Calculate Total</button>
+
+        <div id="result">
+            Enter product details and calculate the total.
+        </div>
+    </div>
+
+    <script>
+        const cart = {
+            productName: "",
+            price: 0,
+            quantity: 0,
+
+            calculateTotal: function () {
+                return this.price * this.quantity;
+            }
+        };
+
+        function calculateTotal() {
+            const name = document.getElementById("name").value.trim();
+            const price = Number(document.getElementById("price").value);
+            const quantity = Number(document.getElementById("quantity").value);
+            const result = document.getElementById("result");
+
+            if (name === "") {
+                result.textContent = "Please enter a product name.";
+                return;
+            }
+
+            if (
+                document.getElementById("price").value === "" ||
+                !Number.isFinite(price) ||
+                price < 0
+            ) {
+                result.textContent = "Please enter a valid price.";
+                return;
+            }
+
+            if (
+                document.getElementById("quantity").value === "" ||
+                !Number.isInteger(quantity) ||
+                quantity <= 0
+            ) {
+                result.textContent = "Quantity must be a positive whole number.";
+                return;
+            }
+
+            cart.productName = name;
+            cart.price = price;
+            cart.quantity = quantity;
+
+            const total = cart.calculateTotal();
+
+            result.innerHTML = `
+                <h3>Cart Summary</h3>
+                <p><strong>Product:</strong> ${cart.productName.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+                <p><strong>Price:</strong> ₹${cart.price.toFixed(2)}</p>
+                <p><strong>Quantity:</strong> ${cart.quantity}</p>
+                <p><strong>Total:</strong> ₹${total.toFixed(2)}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
