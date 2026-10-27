@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 20 - Math Utilities</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+            text-align: center;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            background: #eaf2ff;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Math Utility Functions</h1>
+
+    <p>Enter two numbers to test five reusable functions.</p>
+
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+
+    <button onclick="runUtilities()">Calculate</button>
+
+    <div id="output">Results will appear here.</div>
+</div>
+
+<script>
+// Function 1: Add two numbers
+function add(a, b) {
+    return a + b;
+}
+
+// Function 2: Subtract two numbers
+function subtract(a, b) {
+    return a - b;
+}
+
+// Function 3: Multiply two numbers
+function multiply(a, b) {
+    return a * b;
+}
+
+// Function 4: Divide two numbers
+function divide(a, b) {
+    if (b === 0) {
+        return "Cannot divide by zero";
+    }
+    return a / b;
+}
+
+// Function 5: Find the square of a number
+function square(a) {
+    return a * a;
+}
+
+function runUtilities() {
+    let first = document.getElementById("num1").value;
+    let second = document.getElementById("num2").value;
+
+    if (first === "" || second === "") {
+        document.getElementById("output").textContent =
+            "Please enter both numbers.";
+        return;
+    }
+
+    let a = Number(first);
+    let b = Number(second);
+
+    document.getElementById("output").textContent =
+        "Addition: " + add(a, b) +
+        "\nSubtraction: " + subtract(a, b) +
+        "\nMultiplication: " + multiply(a, b) +
+        "\nDivision: " + divide(a, b) +
+        "\nSquare of first number: " + square(a);
+}
+</script>
+
+</body>
+</html>
