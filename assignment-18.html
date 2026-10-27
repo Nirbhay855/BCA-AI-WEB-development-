@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 18 - JavaScript Debugging</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+            text-align: center;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eaf2ff;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript Debugging</h1>
+
+    <p>This program demonstrates five fixed JavaScript bugs.</p>
+
+    <button onclick="runProgram()">Run Program</button>
+
+    <div id="output">Click the button to see the corrected results.</div>
+</div>
+
+<script>
+function runProgram() {
+    let result = "";
+
+    // Bug 1 fixed: use let instead of an undefined variable
+    let number = 10;
+    result += "1. Number: " + number + "\n";
+
+    // Bug 2 fixed: use the correct addition operator
+    let a = 5;
+    let b = 3;
+    result += "2. Sum: " + (a + b) + "\n";
+
+    // Bug 3 fixed: loop condition uses <=
+    result += "3. Numbers from 1 to 5: ";
+
+    for (let i = 1; i <= 5; i++) {
+        result += i + " ";
+    }
+
+    // Bug 4 fixed: correct array index starts at 0
+    let fruits = ["Apple", "Mango", "Banana"];
+    result += "\n4. First fruit: " + fruits[0] + "\n";
+
+    // Bug 5 fixed: correct function call and return value
+    function multiply(x, y) {
+        return x * y;
+    }
+
+    result += "5. Multiplication: " + multiply(4, 3);
+
+    document.getElementById("output").textContent = result;
+}
+</script>
+
+</body>
+</html>
