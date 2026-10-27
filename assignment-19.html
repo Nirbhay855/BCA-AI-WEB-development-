@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 19 - Mini Projects</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .project {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #2457a7;
+        }
+
+        input {
+            display: block;
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .output {
+            margin-top: 15px;
+            background: #eaf2ff;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript Mini Projects</h1>
+
+    <div class="project">
+        <h2>Project 1: Student Marks Calculator</h2>
+
+        <input type="text" id="studentName"
+               placeholder="Enter student name">
+
+        <input type="number" id="marks1"
+               placeholder="Subject 1 marks (out of 100)">
+
+        <input type="number" id="marks2"
+               placeholder="Subject 2 marks (out of 100)">
+
+        <input type="number" id="marks3"
+               placeholder="Subject 3 marks (out of 100)">
+
+        <button onclick="calculateMarks()">Calculate Result</button>
+
+        <div class="output" id="marksResult">
+            Your result will appear here.
+        </div>
+    </div>
+
+    <div class="project">
+        <h2>Project 2: Shopping Bill Calculator</h2>
+
+        <input type="number" id="itemPrice"
+               placeholder="Enter item price">
+
+        <input type="number" id="itemQuantity"
+               placeholder="Enter quantity">
+
+        <button onclick="calculateBill()">Calculate Bill</button>
+
+        <div class="output" id="billResult">
+            Your bill will appear here.
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateMarks() {
+    let name = document.getElementById("studentName").value.trim();
+    let m1 = Number(document.getElementById("marks1").value);
+    let m2 = Number(document.getElementById("marks2").value);
+    let m3 = Number(document.getElementById("marks3").value);
+
+    if (name === "" ||
+        document.getElementById("marks1").value === "" ||
+        document.getElementById("marks2").value === "" ||
+        document.getElementById("marks3").value === "") {
+        document.getElementById("marksResult").textContent =
+            "Please fill in all fields.";
+        return;
+    }
+
+    if ([m1, m2, m3].some(mark => mark < 0 || mark > 100)) {
+        document.getElementById("marksResult").textContent =
+            "Marks must be between 0 and 100.";
+        return;
+    }
+
+    let total = m1 + m2 + m3;
+    let percentage = total / 3;
+    let status = [m1, m2, m3].every(mark => mark >= 33)
+        ? "Pass" : "Fail";
+
+    document.getElementById("marksResult").textContent =
+        "Student: " + name +
+        "\nTotal Marks: " + total + "/300" +
+        "\nPercentage: " + percentage.toFixed(2) + "%" +
+        "\nResult: " + status;
+}
+
+function calculateBill() {
+    let priceText = document.getElementById("itemPrice").value;
+    let quantityText = document.getElementById("itemQuantity").value;
+    let price = Number(priceText);
+    let quantity = Number(quantityText);
+
+    if (priceText === "" || quantityText === "" ||
+        price <= 0 || quantity <= 0 ||
+        !Number.isInteger(quantity)) {
+        document.getElementById("billResult").textContent =
+            "Enter a positive price and a whole-number quantity.";
+        return;
+    }
+
+    let total = price * quantity;
+
+    document.getElementById("billResult").textContent =
+        "Price per item: ₹" + price.toFixed(2) +
+        "\nQuantity: " + quantity +
+        "\nTotal Bill: ₹" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
