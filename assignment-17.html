@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 17 - Loop Problems</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+            text-align: center;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            background: #eef3fa;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Beginner Loop Problems</h1>
+
+    <p>1. Print numbers from 1 to 10.</p>
+    <p>2. Calculate the sum of numbers from 1 to 10.</p>
+    <p>3. Print the multiplication table of 5.</p>
+    <p>4. Print all even numbers from 1 to 20.</p>
+    <p>5. Calculate the factorial of 5.</p>
+
+    <button onclick="solveProblems()">Run Programs</button>
+
+    <div id="output">Click the button to see the results.</div>
+</div>
+
+<script>
+function solveProblems() {
+    let result = "";
+
+    // Problem 1: Numbers from 1 to 10
+    result += "1. Numbers from 1 to 10:\n";
+
+    for (let i = 1; i <= 10; i++) {
+        result += i + " ";
+    }
+
+    // Problem 2: Sum from 1 to 10
+    let sum = 0;
+
+    for (let i = 1; i <= 10; i++) {
+        sum += i;
+    }
+
+    result += "\n\n2. Sum from 1 to 10: " + sum;
+
+    // Problem 3: Multiplication table of 5
+    result += "\n\n3. Table of 5:\n";
+
+    for (let i = 1; i <= 10; i++) {
+        result += "5 x " + i + " = " + (5 * i) + "\n";
+    }
+
+    // Problem 4: Even numbers from 1 to 20
+    result += "\n4. Even numbers from 1 to 20:\n";
+
+    for (let i = 2; i <= 20; i += 2) {
+        result += i + " ";
+    }
+
+    // Problem 5: Factorial of 5
+    let factorial = 1;
+
+    for (let i = 1; i <= 5; i++) {
+        factorial *= i;
+    }
+
+    result += "\n\n5. Factorial of 5: " + factorial;
+
+    document.getElementById("output").textContent = result;
+}
+</script>
+
+</body>
+</html>
