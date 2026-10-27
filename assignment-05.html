@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile Card</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dce8ff, #f5e8ff);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 360px;
+            padding: 30px;
+            background: white;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 30px #283b641f;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #315cba;
+            color: white;
+            font-size: 38px;
+            font-weight: bold;
+            border: 5px solid #e2eaff;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            color: #263653;
+        }
+
+        .role {
+            color: #315cba;
+            font-weight: bold;
+        }
+
+        .bio {
+            color: #626b7b;
+            line-height: 1.6;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .skills span {
+            padding: 8px 12px;
+            background: #edf2ff;
+            color: #315cba;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #315cba;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .button:hover {
+            background: #1e408c;
+        }
+
+        .social {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .social a {
+            margin: 0 8px;
+            color: #315cba;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="avatar">B</div>
+
+        <h1>My Profile</h1>
+        <p class="role">BCA AI Student</p>
+
+        <p class="bio">
+            I am learning web development and building
+            projects using HTML, CSS and Java.
+        </p>
+
+        <div class="skills">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Java</span>
+            <span>GitHub</span>
+        </div>
+
+        <a class="button" href="https://github.com/">
+            Visit GitHub
+        </a>
+
+        <div class="social">
+            <a href="https://github.com/">GitHub</a>
+            <a href="https://www.linkedin.com/">LinkedIn</a>
+        </div>
+    </div>
+</body>
+</html>
