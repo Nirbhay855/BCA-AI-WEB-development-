@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Selection Challenge</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .item {
+            background: #dbeafe;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 15px;
+            padding: 12px;
+            background: #dcfce7;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Element Selection Challenge</h1>
+
+        <p id="intro">This is the introduction paragraph.</p>
+
+        <p class="item">Item 1: HTML</p>
+        <p class="item">Item 2: CSS</p>
+        <p class="item">Item 3: JavaScript</p>
+
+        <button onclick="runChallenge()">Run Challenge</button>
+
+        <div id="output">Click the button to see the results.</div>
+    </div>
+
+    <script>
+        function runChallenge() {
+            // Challenge 1: Select an element by ID.
+            const intro = document.getElementById("intro");
+
+            // Challenge 2: Select the first element by class.
+            const firstItem = document.querySelector(".item");
+
+            // Challenge 3: Select all elements with the class.
+            const allItems = document.querySelectorAll(".item");
+
+            // Challenge 4: Select the heading.
+            const heading = document.querySelector("h1");
+
+            // Change selected elements.
+            intro.textContent = "Introduction selected successfully!";
+            firstItem.style.backgroundColor = "#bbf7d0";
+            heading.textContent = "Challenge Completed!";
+
+            // Display selection results.
+            document.getElementById("output").innerHTML = `
+                <h3>Challenge Results</h3>
+                <p>1. Element by ID: ${intro.id}</p>
+                <p>2. First element by class: ${firstItem.textContent}</p>
+                <p>3. Total elements with class item: ${allItems.length}</p>
+                <p>4. Selected heading: ${heading.tagName}</p>
+                <p>All challenges completed successfully!</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
