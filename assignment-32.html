@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Summary Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eaf2ff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Profile Summary</h1>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" value="Rahul Sharma">
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" value="20">
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" value="BCA">
+
+        <label for="city">City:</label>
+        <input type="text" id="city" value="Bareilly">
+
+        <button onclick="generateSummary()">Generate Summary</button>
+
+        <div id="output">
+            Your profile summary will appear here.
+        </div>
+    </div>
+
+    <script>
+        function generateSummary() {
+            const profile = {
+                name: document.getElementById("name").value.trim(),
+                age: Number(document.getElementById("age").value),
+                course: document.getElementById("course").value.trim(),
+                city: document.getElementById("city").value.trim()
+            };
+
+            const output = document.getElementById("output");
+
+            if (
+                profile.name === "" ||
+                profile.course === "" ||
+                profile.city === "" ||
+                document.getElementById("age").value === "" ||
+                !Number.isInteger(profile.age) ||
+                profile.age <= 0
+            ) {
+                output.textContent = "Please enter valid details in all fields.";
+                return;
+            }
+
+            // Object.keys() returns all property names.
+            const propertyNames = Object.keys(profile);
+
+            // Object.values() returns all property values.
+            const propertyValues = Object.values(profile);
+
+            // Object.entries() returns key-value pairs.
+            const entries = Object.entries(profile);
+
+            const safe = (value) =>
+                String(value).replace(/[&<>"']/g, character => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                })[character]);
+
+            output.innerHTML = `
+                <h3>${safe(profile.name)}</h3>
+                <p><strong>Age:</strong> ${profile.age}</p>
+                <p><strong>Course:</strong> ${safe(profile.course)}</p>
+                <p><strong>City:</strong> ${safe(profile.city)}</p>
+
+                <hr>
+                <p><strong>Object Keys:</strong> ${propertyNames.join(", ")}</p>
+                <p><strong>Object Values:</strong> ${propertyValues.map(safe).join(", ")}</p>
+                <p><strong>Total Properties:</strong> ${entries.length}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
