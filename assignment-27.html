@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 27 - Text Cleaning Utility</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+            text-align: center;
+        }
+
+        textarea {
+            width: 97%;
+            min-height: 120px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            margin: 8px 4px 8px 0;
+            cursor: pointer;
+        }
+
+        .output {
+            background: #eaf2ff;
+            padding: 15px;
+            margin-top: 15px;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Text-Cleaning Utility</h1>
+
+    <p>Enter text containing extra spaces or inconsistent capitalization.</p>
+
+    <textarea id="inputText"
+        placeholder="Example:    hello     WORLD   welcome   "></textarea>
+
+    <br>
+
+    <button onclick="cleanText()">Clean Text</button>
+    <button onclick="convertToLower()">Lowercase</button>
+    <button onclick="convertToUpper()">Uppercase</button>
+    <button onclick="clearText()">Clear</button>
+
+    <h2>Cleaned Output</h2>
+    <div class="output" id="output">Your result will appear here.</div>
+</div>
+
+<script>
+// Utility 1: Remove spaces from the beginning and end
+function trimText(text) {
+    return text.trim();
+}
+
+// Utility 2: Replace multiple spaces with a single space
+function removeExtraSpaces(text) {
+    return text.replace(/\s+/g, " ");
+}
+
+// Utility 3: Convert text to lowercase
+function toLowerCaseText(text) {
+    return text.toLowerCase();
+}
+
+// Utility 4: Convert text to uppercase
+function toUpperCaseText(text) {
+    return text.toUpperCase();
+}
+
+// Utility 5: Remove leading and trailing spaces
+// and normalize spaces between words
+function cleanInput(text) {
+    return removeExtraSpaces(trimText(text));
+}
+
+function getInput() {
+    return document.getElementById("inputText").value;
+}
+
+function cleanText() {
+    let result = cleanInput(getInput());
+
+    document.getElementById("output").textContent =
+        result === "" ? "Please enter some text." : result;
+}
+
+function convertToLower() {
+    let result = cleanInput(getInput());
+
+    document.getElementById("output").textContent =
+        result === ""
+            ? "Please enter some text."
+            : toLowerCaseText(result);
+}
+
+function convertToUpper() {
+    let result = cleanInput(getInput());
+
+    document.getElementById("output").textContent =
+        result === ""
+            ? "Please enter some text."
+            : toUpperCaseText(result);
+}
+
+function clearText() {
+    document.getElementById("inputText").value = "";
+    document.getElementById("output").textContent =
+        "Your result will appear here.";
+}
+</script>
+
+</body>
+</html>
