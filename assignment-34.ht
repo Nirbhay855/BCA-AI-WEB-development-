@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Testing</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .result {
+            background: #eaf2ff;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
+        }
+
+        .pass {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Catalogue Testing Report</h1>
+
+    <p>This project tests product catalogue data and reusable utilities.</p>
+
+    <button onclick="runTests()">Run Test Scenarios</button>
+
+    <div id="output" class="result">
+        Click the button to run tests.
+    </div>
+</div>
+
+<script>
+    const catalogue = {
+        catalogueName: "Electronics Store",
+        products: [
+            { id: 1, name: "Smartphone", category: "Electronics", price: 25000, inStock: true },
+            { id: 2, name: "Laptop", category: "Computers", price: 55000, inStock: true },
+            { id: 3, name: "Headphones", category: "Accessories", price: 1500, inStock: false }
+        ]
+    };
+
+    // Utility 1: Find a product by its ID.
+    function findProduct(id) {
+        return catalogue.products.find(product => product.id === id);
+    }
+
+    // Utility 2: Filter products by category.
+    function filterByCategory(category) {
+        return catalogue.products.filter(
+            product => product.category === category
+        );
+    }
+
+    // Utility 3: Calculate total price of all products.
+    function calculateTotal() {
+        return catalogue.products.reduce(
+            (total, product) => total + product.price, 0
+        );
+    }
+
+    // Utility 4: Count products in stock.
+    function countInStock() {
+        return catalogue.products.filter(product => product.inStock).length;
+    }
+
+    function runTests() {
+        const tests = [
+            {
+                name: "Find existing product",
+                passed: findProduct(1)?.name === "Smartphone"
+            },
+            {
+                name: "Handle missing product",
+                passed: findProduct(99) === undefined
+            },
+            {
+                name: "Filter Electronics category",
+                passed: filterByCategory("Electronics").length === 1
+            },
+            {
+                name: "Calculate catalogue total",
+                passed: calculateTotal() === 81500
+            },
+            {
+                name: "Count products in stock",
+                passed: countInStock() === 2
+            }
+        ];
+
+        const passedCount = tests.filter(test => test.passed).length;
+
+        const output = document.getElementById("output");
+
+        output.innerHTML = `
+            <h3>Test Results: ${passedCount}/${tests.length} Passed</h3>
+            ${tests.map(test => `
+                <p class="${test.passed ? "pass" : "fail"}">
+                    ${test.passed ? "PASS" : "FAIL"} - ${test.name}
+                </p>
+            `).join("")}
+            <p><strong>Total catalogue value:</strong> ₹${calculateTotal()}</p>
+            <p><strong>Products in stock:</strong> ${countInStock()}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
