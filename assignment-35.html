@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Node Relationships</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .parent {
+            background: #dbeafe;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .child {
+            background: #dcfce7;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+        }
+
+        .result {
+            background: #fef3c7;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>HTML Node Relationships</h1>
+
+        <div id="parent" class="parent">
+            Parent: DIV
+            <p id="child1" class="child">Child 1: Paragraph</p>
+            <p id="child2" class="child">Child 2: Paragraph</p>
+
+            <div id="nested" class="child">
+                Nested Child: DIV
+                <span id="descendant">Descendant: SPAN</span>
+            </div>
+        </div>
+
+        <br>
+        <button onclick="showRelationships()">Show Relationships</button>
+
+        <div id="output" class="result">
+            Click the button to view node relationships.
+        </div>
+    </div>
+
+    <script>
+        function showRelationships() {
+            const parent = document.getElementById("parent");
+            const child1 = document.getElementById("child1");
+            const child2 = document.getElementById("child2");
+            const nested = document.getElementById("nested");
+            const descendant = document.getElementById("descendant");
+
+            const results = [
+                "Parent of Child 1: " +
+                    child1.parentElement.tagName,
+
+                "Child 1 and Child 2 are siblings: " +
+                    (child1.parentElement === child2.parentElement),
+
+                "Parent contains Child 1: " +
+                    parent.contains(child1),
+
+                "Parent contains Descendant: " +
+                    parent.contains(descendant),
+
+                "Nested DIV is a child of Parent: " +
+                    (nested.parentElement === parent),
+
+                "SPAN is a descendant of Parent: " +
+                    parent.contains(descendant)
+            ];
+
+            document.getElementById("output").innerHTML =
+                "<h3>Relationship Results</h3>" +
+                results.map(item => `<p>${item}</p>`).join("");
+        }
+    </script>
+
+</body>
+</html>
