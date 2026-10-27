@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .calculator {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #00000020;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            font-size: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 12px;
+            font-size: 22px;
+            text-align: right;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        button {
+            padding: 16px 8px;
+            border: none;
+            border-radius: 8px;
+            background: #e2e8f0;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #cbd5e1;
+        }
+
+        .operator {
+            background: #bfdbfe;
+        }
+
+        .clear {
+            background: #fecaca;
+        }
+
+        .equal {
+            background: #2563eb;
+            color: white;
+        }
+
+        #message {
+            text-align: center;
+            color: #dc2626;
+            min-height: 20px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <h1>My Calculator</h1>
+
+        <input type="text" id="display" value="0" readonly>
+
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button class="operator" onclick="chooseOperator('%')">%</button>
+            <button class="operator" onclick="chooseOperator('/')">÷</button>
+
+            <button onclick="addNumber('7')">7</button>
+            <button onclick="addNumber('8')">8</button>
+            <button onclick="addNumber('9')">9</button>
+            <button class="operator" onclick="chooseOperator('*')">×</button>
+
+            <button onclick="addNumber('4')">4</button>
+            <button onclick="addNumber('5')">5</button>
+            <button onclick="addNumber('6')">6</button>
+            <button class="operator" onclick="chooseOperator('-')">−</button>
+
+            <button onclick="addNumber('1')">1</button>
+            <button onclick="addNumber('2')">2</button>
+            <button onclick="addNumber('3')">3</button>
+            <button class="operator" onclick="chooseOperator('+')">+</button>
+
+            <button onclick="addNumber('0')">0</button>
+            <button onclick="addDecimal()">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+        </div>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const display = document.getElementById("display");
+        const message = document.getElementById("message");
+
+        let firstNumber = null;
+        let operator = null;
+        let startNewNumber = true;
+
+        function addNumber(number) {
+            message.textContent = "";
+
+            if (startNewNumber || display.value === "0") {
+                display.value = number;
+                startNewNumber = false;
+            } else {
+                display.value += number;
+            }
+        }
+
+        function addDecimal() {
+            if (startNewNumber) {
+                display.value = "0.";
+                startNewNumber = false;
+            } else if (!display.value.includes(".")) {
+                display.value += ".";
+            }
+        }
+
+        function chooseOperator(selectedOperator) {
+            firstNumber = Number(display.value);
+            operator = selectedOperator;
+            startNewNumber = true;
+            message.textContent = "";
+        }
+
+        function calculate() {
+            if (operator === null || startNewNumber) {
+                return;
+            }
+
+            const secondNumber = Number(display.value);
+            let result;
+
+            switch (operator) {
+                case "+":
+                    result = firstNumber + secondNumber;
+                    break;
+                case "-":
+                    result = firstNumber - secondNumber;
+                    break;
+                case "*":
+                    result = firstNumber * secondNumber;
+                    break;
+                case "/":
+                    if (secondNumber === 0) {
+                        message.textContent = "Cannot divide by zero!";
+                        return;
+                    }
+                    result = firstNumber / secondNumber;
+                    break;
+                case "%":
+                    if (secondNumber === 0) {
+                        message.textContent = "Cannot divide by zero!";
+                        return;
+                    }
+                    result = firstNumber % secondNumber;
+                    break;
+            }
+
+            display.value = String(
+                Number(result.toPrecision(10))
+            );
+
+            firstNumber = null;
+            operator = null;
+            startNewNumber = true;
+        }
+
+        function clearDisplay() {
+            display.value = "0";
+            firstNumber = null;
+            operator = null;
+            startNewNumber = true;
+            message.textContent = "";
+        }
+
+        function deleteLast() {
+            if (startNewNumber) {
+                return;
+            }
+
+            display.value = display.value.slice(0, -1) || "0";
+        }
+    </script>
+
+</body>
+</html>
