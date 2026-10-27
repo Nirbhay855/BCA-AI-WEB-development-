@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 26 - Product Dataset</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2457a7;
+            text-align: center;
+        }
+
+        select, input {
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2457a7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #eaf2ff;
+        }
+
+        #summary {
+            background: #eaf2ff;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Product Dataset Analysis</h1>
+
+    <label for="category">Filter by category:</label>
+    <select id="category">
+        <option value="All">All Categories</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Books">Books</option>
+    </select>
+
+    <br>
+
+    <label for="maxPrice">Maximum price (₹):</label>
+    <input type="number" id="maxPrice" placeholder="e.g. 1000">
+
+    <button onclick="analyzeProducts()">Filter Products</button>
+    <button onclick="resetFilters()">Reset</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="productTable"></tbody>
+    </table>
+
+    <div id="summary"></div>
+</div>
+
+<script>
+const products = [
+    { name: "Headphones", category: "Electronics", price: 800 },
+    { name: "Keyboard", category: "Electronics", price: 1200 },
+    { name: "T-Shirt", category: "Clothing", price: 500 },
+    { name: "Jeans", category: "Clothing", price: 1000 },
+    { name: "Java Book", category: "Books", price: 400 },
+    { name: "HTML Book", category: "Books", price: 300 },
+    { name: "Mouse", category: "Electronics", price: 600 }
+];
+
+function analyzeProducts() {
+    let category = document.getElementById("category").value;
+    let maxPriceText = document.getElementById("maxPrice").value;
+
+    if (maxPriceText !== "" &&
+        (!Number.isFinite(Number(maxPriceText)) ||
+         Number(maxPriceText) < 0)) {
+        document.getElementById("summary").textContent =
+            "Please enter a valid maximum price.";
+        return;
+    }
+
+    let filtered = products.filter(function(product) {
+        let categoryMatch =
+            category === "All" || product.category === category;
+
+        let priceMatch =
+            maxPriceText === "" ||
+            product.price <= Number(maxPriceText);
+
+        return categoryMatch && priceMatch;
+    });
+
+    let totalValue = filtered.reduce(function(total, product) {
+        return total + product.price;
+    }, 0);
+
+    let averagePrice = filtered.length > 0
+        ? totalValue / filtered.length
+        : 0;
+
+    displayProducts(filtered);
+
+    document.getElementById("summary").textContent =
+        "Products found: " + filtered.length +
+        "\nTotal value: ₹" + totalValue +
+        "\nAverage price: ₹" + averagePrice.toFixed(2);
+}
+
+function displayProducts(list) {
+    let table = document.getElementById("productTable");
+    table.textContent = "";
+
+    list.forEach(function(product) {
+        let row = document.createElement("tr");
+
+        [product.name, product.category, "₹" + product.price]
+            .forEach(function(value) {
+                let cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+        table.appendChild(row);
+    });
+}
+
+function resetFilters() {
+    document.getElementById("category").value = "All";
+    document.getElementById("maxPrice").value = "";
+    analyzeProducts();
+}
+
+analyzeProducts();
+</script>
+
+</body>
+</html>
