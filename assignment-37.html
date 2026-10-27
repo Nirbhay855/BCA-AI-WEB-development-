@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Profile Updater</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+
+        input, textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .profile {
+            margin-top: 20px;
+            padding: 15px;
+            background: #dcfce7;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Profile Updater</h1>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="Rahul Sharma">
+
+        <label for="bio">About Me:</label>
+        <textarea id="bio" rows="3">I am learning web development.</textarea>
+
+        <button onclick="updateProfile()">Update Profile</button>
+
+        <div class="profile">
+            <h2 id="profileName">Rahul Sharma</h2>
+            <p id="profileBio">I am learning web development.</p>
+        </div>
+    </div>
+
+    <script>
+        function updateProfile() {
+            const name = document.getElementById("name").value.trim();
+            const bio = document.getElementById("bio").value.trim();
+
+            if (name === "" || bio === "") {
+                alert("Please enter both name and about me.");
+                return;
+            }
+
+            // textContent safely treats user input as plain text.
+            document.getElementById("profileName").textContent = name;
+            document.getElementById("profileBio").textContent = bio;
+        }
+    </script>
+
+</body>
+</html>
