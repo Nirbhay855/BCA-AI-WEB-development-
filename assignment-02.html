@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 25px 15px;
+            font-family: Arial, sans-serif;
+            background: #eaf0f6;
+            color: #333;
+        }
+
+        .resume {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px #00000018;
+        }
+
+        header {
+            background: #17365d;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 6px 0;
+        }
+
+        main {
+            padding: 25px 30px;
+        }
+
+        section {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #17365d;
+            border-bottom: 2px solid #4b83c3;
+            padding-bottom: 8px;
+        }
+
+        ul {
+            padding-left: 22px;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background: #e4edf8;
+            color: #17365d;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #f4f6f8;
+            text-align: center;
+            padding: 15px;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            header, main {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume">
+        <header>
+            <h1>Your Name</h1>
+            <p>BCA Artificial Intelligence Student</p>
+            <p>Email: your.email@example.com</p>
+            <p>Location: Bareilly, Uttar Pradesh</p>
+        </header>
+
+        <main>
+            <section>
+                <h2>Career Objective</h2>
+                <p>
+                    I am a BCA Artificial Intelligence student who wants
+                    to improve my technical knowledge and practical skills.
+                    I am eager to learn new technologies and work on projects.
+                </p>
+            </section>
+
+            <section>
+                <h2>Education</h2>
+                <ul>
+                    <li>Bachelor of Computer Applications (AI) - Pursuing</li>
+                    <li>Class 12 - CBSE Board</li>
+                    <li>Class 10 - CBSE Board</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Technical Skills</h2>
+                <div class="skills">
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">Java Basics</span>
+                    <span class="skill">GitHub</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Projects</h2>
+                <ul>
+                    <li>Styled Webpage using HTML and CSS</li>
+                    <li>Student Resume Webpage</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Strengths</h2>
+                <ul>
+                    <li>Willingness to learn</li>
+                    <li>Problem-solving attitude</li>
+                    <li>Teamwork and time management</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            Resume Webpage | Created using HTML and CSS
+        </footer>
+    </div>
+</body>
+</html>
