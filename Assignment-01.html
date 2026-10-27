@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Webpage</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #2457a7;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #00000015;
+        }
+
+        h2 {
+            color: #2457a7;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #2457a7;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .button:hover {
+            background-color: #163c78;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            main {
+                margin: 15px;
+                padding: 18px;
+            }
+
+            header {
+                padding: 22px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to My Webpage</h1>
+        <p>My First Styled HTML Project</p>
+    </header>
+
+    <main>
+        <h2>About This Project</h2>
+        <p>
+            This webpage was created using HTML and CSS.
+            CSS improves the appearance of a webpage by adding
+            colors, spacing, backgrounds and layouts.
+        </p>
+
+        <h2>What I Learned</h2>
+        <p>
+            I learned how to use CSS selectors, colors, margins,
+            padding, borders, shadows and responsive design.
+        </p>
+
+        <a class="button" href="https://github.com/">Visit GitHub</a>
+    </main>
+
+    <footer>
+        <p>Created by BCA AI Student | Assignment 1</p>
+    </footer>
+</body>
+</html>
