@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Card Renderer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000015;
+        }
+
+        .card h2 {
+            color: #1d4ed8;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 15px 5px 0 0;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <h1>Product Cards</h1>
+
+        <button id="showButton" type="button">Show Products</button>
+
+        <section id="cards" class="cards" aria-live="polite">
+            <p>Click the button to display products.</p>
+        </section>
+    </main>
+
+    <script>
+        const products = [
+            {
+                name: "Smartphone",
+                price: 25000,
+                description: "A useful smartphone for daily tasks."
+            },
+            {
+                name: "Laptop",
+                price: 55000,
+                description: "A laptop for study and work."
+            },
+            {
+                name: "Headphones",
+                price: 1500,
+                description: "Headphones for music and calls."
+            }
+        ];
+
+        // Safely create a text element.
+        function createTextElement(tag, text, className = "") {
+            const element = document.createElement(tag);
+            element.textContent = text;
+
+            if (className) {
+                element.className = className;
+            }
+
+            return element;
+        }
+
+        // Reusable function to create one product card.
+        function renderCard(product) {
+            const card = document.createElement("article");
+            card.className = "card";
+
+            card.appendChild(createTextElement("h2", product.name));
+            card.appendChild(
+                createTextElement("p", product.description)
+            );
+            card.appendChild(
+                createTextElement(
+                    "p",
+                    "Price: ₹" + product.price,
+                    "price"
+                )
+            );
+
+            return card;
+        }
+
+        // Render all product cards.
+        function renderProducts() {
+            const cardsContainer = document.getElementById("cards");
+            cardsContainer.replaceChildren();
+
+            products.forEach(function(product) {
+                const card = renderCard(product);
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        document.getElementById("showButton").addEventListener(
+            "click",
+            renderProducts
+        );
+    </script>
+
+</body>
+</html>
