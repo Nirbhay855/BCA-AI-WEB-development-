@@ -1,0 +1,39 @@
+
+{
+  "catalogueName": "Electronics Store",
+  "products": [
+    {
+      "id": 1,
+      "name": "Smartphone",
+      "category": "Electronics",
+      "price": 25000,
+      "inStock": true,
+      "specifications": {
+        "ram": "8 GB",
+        "storage": "128 GB"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Laptop",
+      "category": "Computers",
+      "price": 55000,
+      "inStock": true,
+      "specifications": {
+        "ram": "16 GB",
+        "storage": "512 GB SSD"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Headphones",
+      "category": "Accessories",
+      "price": 1500,
+      "inStock": false,
+      "specifications": {
+        "type": "Wireless",
+        "battery": "20 hours"
+      }
+    }
+  ]
+}
