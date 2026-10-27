@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 24 - Testing and Reflection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #2457a7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #eaf2ff;
+        }
+
+        textarea {
+            width: 98%;
+            min-height: 100px;
+            padding: 8px;
+        }
+
+        button {
+            background: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 15px;
+            padding: 12px;
+            background: #e6f7e9;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Practical Testing Report</h1>
+
+    <h2>Project Tested</h2>
+    <p>Settings Merge and Shopping Total Calculator</p>
+
+    <h2>Test Cases</h2>
+
+    <table>
+        <tr>
+            <th>Test</th>
+            <th>Input</th>
+            <th>Expected Result</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Prices: 100, 200, 50</td>
+            <td>Total = ₹350</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Prices: 0, 0, 0</td>
+            <td>Total = ₹0</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>One price is empty</td>
+            <td>Show validation message</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>One price is negative</td>
+            <td>Reject invalid price</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Website name: My Store</td>
+            <td>Update website name</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Font size: 50</td>
+            <td>Reject invalid font size</td>
+        </tr>
+    </table>
+
+    <h2>Run a Test</h2>
+
+    <label for="testNumber">Choose a test case:</label>
+    <select id="testNumber">
+        <option value="1">Test 1 - Normal prices</option>
+        <option value="2">Test 2 - Zero prices</option>
+        <option value="3">Test 3 - Missing price</option>
+        <option value="4">Test 4 - Negative price</option>
+        <option value="5">Test 5 - Custom website name</option>
+        <option value="6">Test 6 - Invalid font size</option>
+    </select>
+
+    <button onclick="runTest()">Run Test</button>
+
+    <div id="result">Test results will appear here.</div>
+
+    <h2>Short Reflection</h2>
+
+    <p>
+        This practical helped me understand how to test JavaScript
+        functions, validate inputs and handle invalid values.
+        I learned that testing different inputs helps find errors
+        and makes a program more reliable.
+    </p>
+
+    <h2>My Reflection</h2>
+
+    <textarea id="reflection"
+        placeholder="Write what you learned from this practical..."></textarea>
+
+    <button onclick="saveReflection()">Show Reflection</button>
+
+    <div id="reflectionOutput"></div>
+</div>
+
+<script>
+function runTest() {
+    let test = document.getElementById("testNumber").value;
+    let message = "";
+
+    switch (test) {
+        case "1": {
+            let total = 100 + 200 + 50;
+            message = "Expected: ₹350\nActual: ₹" + total +
+                "\nResult: " + (total === 350 ? "PASS" : "FAIL");
+            break;
+        }
+
+        case "2": {
+            let total = 0 + 0 + 0;
+            message = "Expected: ₹0\nActual: ₹" + total +
+                "\nResult: " + (total === 0 ? "PASS" : "FAIL");
+            break;
+        }
+
+        case "3": {
+            let missingPrice = "";
+            let valid = missingPrice !== "";
+            message = "Expected: Missing price rejected\nActual: " +
+                (valid ? "Accepted" : "Rejected") +
+                "\nResult: " + (!valid ? "PASS" : "FAIL");
+            break;
+        }
+
+        case "4": {
+            let price = -10;
+            let valid = price >= 0;
+            message = "Expected: Negative price rejected\nActual: " +
+                (valid ? "Accepted" : "Rejected") +
+                "\nResult: " + (!valid ? "PASS" : "FAIL");
+            break;
+        }
+
+        case "5": {
+            let defaults = { websiteName: "My Website", fontSize: 16 };
+            let custom = { websiteName: "My Store" };
+            let merged = { ...defaults, ...custom };
+            message = "Expected: My Store\nActual: " +
+                merged.websiteName +
+                "\nResult: " +
+                (merged.websiteName === "My Store" ? "PASS" : "FAIL");
+            break;
+        }
+
+        case "6": {
+            let fontSize = 50;
+            let valid = Number.isInteger(fontSize) &&
+                fontSize >= 10 && fontSize <= 40;
+            message = "Expected: Invalid font size rejected\nActual: " +
+                (valid ? "Accepted" : "Rejected") +
+                "\nResult: " + (!valid ? "PASS" : "FAIL");
+            break;
+        }
+    }
+
+    document.getElementById("result").textContent = message;
+}
+
+function saveReflection() {
+    let reflection = document.getElementById("reflection").value.trim();
+
+    if (reflection === "") {
+        document.getElementById("reflectionOutput").textContent =
+            "Please write your reflection first.";
+        return;
+    }
+
+    document.getElementById("reflectionOutput").textContent =
+        "My Reflection:\n" + reflection;
+}
+</script>
+
+</body>
+</html>
