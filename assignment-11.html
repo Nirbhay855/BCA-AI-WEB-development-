@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Student Object</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .result p {
+            line-height: 1.5;
+            color: #334155;
+        }
+
+        #error {
+            color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Student Details</h1>
+
+        <label for="name">Student Name</label>
+        <input type="text" id="name" value="Rahul Sharma">
+
+        <label for="roll">Roll Number</label>
+        <input type="text" id="roll" value="101">
+
+        <label for="course">Course</label>
+        <select id="course">
+            <option value="BCA AI">BCA Artificial Intelligence</option>
+           <option value="BCA">BCA</option>
+            <option value="BSc">BSc</option>
+            <option value="BCom">BCom</option>
+        </select>
+
+        <label for="marks">Marks (out of 100)</label>
+        <input type="number" id="marks" value="85" min="0" max="100">
+
+        <button onclick="showStudent()">Show Student Details</button>
+
+        <p id="error"></p>
+        <div class="result" id="result">
+            <p>Student details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function showStudent() {
+            const name = document.getElementById("name").value.trim();
+            const roll = document.getElementById("roll").value.trim();
+            const course = document.getElementById("course").value;
+            const marksInput = document.getElementById("marks").value;
+            const marks = Number(marksInput);
+
+            const error = document.getElementById("error");
+            const result = document.getElementById("result");
+
+            error.textContent = "";
+
+            if (name === "" || roll === "" || marksInput === "") {
+                error.textContent = "Please fill in all fields.";
+                result.innerHTML = "";
+                return;
+            }
+
+            if (!Number.isFinite(marks) || marks < 0 || marks > 100) {
+                error.textContent = "Marks must be between 0 and 100.";
+                result.innerHTML = "";
+                return;
+            }
+
+            const student = {
+                name: name,
+                rollNumber: roll,
+                course: course,
+                marks: marks,
+                getResult: function() {
+                    return this.marks >= 33 ? "Pass" : "Fail";
+                }
+            };
+
+            const safeName = escapeHTML(student.name);
+            const safeRoll = escapeHTML(student.rollNumber);
+            const safeCourse = escapeHTML(student.course);
+
+            result.innerHTML = `
+                <h3>Student Information</h3>
+                <p><strong>Name:</strong> ${safeName}</p>
+                <p><strong>Roll Number:</strong> ${safeRoll}</p>
+                <p><strong>Course:</strong> ${safeCourse}</p>
+                <p><strong>Marks:</strong> ${student.marks}/100</p>
+                <p><strong>Result:</strong> ${student.getResult()}</p>
+            `;
+        }
+
+        function escapeHTML(value) {
+            return value.replace(/[&<>"']/g, function(character) {
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+                return entities[character];
+            });
+        }
+
+        showStudent();
+    </script>
+
+</body>
+</html>
